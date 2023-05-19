@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ChatroomMapper">
+	<resultMap id="chatroomSelectMap" type="chatroom">
+		<result property="chatroomName" 		column="CHATROOMNAME" 			jdbcType="VARCHAR"/>
+		<result property="chatroomNo"			column="CHATROOMNO" 		jdbcType="NUMERIC"/>
+	</resultMap> 	
+	
+	<insert 	id="addChatroom"		parameterType="chatroom" >
+	 	INSERT
+		INTO chatroom (CHATROOMNAME , CHATROOMNO) 
+		VALUES	 (#{chatroomName}, seq_chatroom_chatroomno.NEXTVAL)
+	 </insert>
+	 <!-- ??? -->
+	
+</mapper>
+	
