@@ -1,8 +1,6 @@
 <%@ page contentType="text/html; charset=EUC-KR"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<a href="../product/addProductView.jsp;">추가등록</a>
-<a href="/listProduct.do?menu=manage">확인</a>
 
 <html>
 <head>

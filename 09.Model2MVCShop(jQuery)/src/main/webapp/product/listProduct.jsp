@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=euc-kr" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 
 
@@ -23,6 +23,7 @@ $(function() {
 	$( "td.ct_btn01:contains('검색')" ).on("click" , function() {
 		fncGetUserList(1);
 	});
+	
 $( ".ct_list_pop td:nth-child(3)" ).on("click" , function() {
 	
 	var a = $($(this).children());
@@ -134,7 +135,22 @@ $(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
 			<td></td>
 			<td align="left">${product.manuDate}</td>
 			<td></td>
-			<td align="left">재고없음</td>
+			<td align="left"><c:if test="${fn:trim(product.proTranCode) eq '0'}">
+					판매중
+				</c:if>
+				<c:if test="${fn:trim(product.proTranCode) eq '1'}">
+					판매완료
+					<c:if test="${param.menu=='manage'}">
+						<a href="/updateTranCodeByProd?prodNo=${product.prodNo}&tranCode=2">배송하기</a>
+					</c:if>
+				</c:if>
+				<c:if test="${fn:trim(product.proTranCode) eq '2'}">
+					배송중
+				</c:if>
+				<c:if test="${fn:trim(product.proTranCode) eq '3'}">
+					배송완료
+				</c:if>
+</td>
 		</tr>
 		<tr>
 			<td colspan="11" bgcolor="D6D7D6" height="1"></td>

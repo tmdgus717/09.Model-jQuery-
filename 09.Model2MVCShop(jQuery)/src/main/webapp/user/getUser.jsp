@@ -29,7 +29,7 @@
 			 $( "td.ct_btn01:contains('수정')" ).on("click" , function() {
 					//Debug..
 					//alert(  $( "td.ct_btn01:contains('수정')" ).html() );
-					self.location = "/user/updateUser?userId=${user.userId}"
+					self.location = "/user/updateUser?userId=${user.userId}";
 				});
 		});
 		

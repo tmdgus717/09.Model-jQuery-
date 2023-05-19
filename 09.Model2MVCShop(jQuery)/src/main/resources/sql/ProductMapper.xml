@@ -15,6 +15,7 @@
 		<result property="prodName" 		column="prod_name" 				jdbcType="VARCHAR" />
 		<result property="prodNo" 			column="prod_no" 				jdbcType="NUMERIC" />
 		<result property="regDate" 			column="reg_date" 				jdbcType="DATE" />
+		<result property="proTranCode" 		column="tran_status_code" 			jdbcType="VARCHAR" />
 	</resultMap>
 	
 	<!-- SQL : INSERT -->
@@ -29,7 +30,7 @@
 		SELECT
 		prod_no , prod_name , prod_detail , MANUFACTURE_DAY , price, IMAGE_FILE, reg_date	
 		FROM product 
-		WHERE prod_no = #{value}
+		WHERE prod_no = #{prodNo}
 	 </select>
 	 
 	 <!-- SQL : UPDATE -->
@@ -49,19 +50,20 @@
 	<select  id="getProductList"  parameterType="search"	resultMap="productSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT *
-											FROM product
-											<if test="searchCondition != null">
+	  					FROM		(	SELECT NVL(t.tran_status_code, '0') AS tran_status_code, p.*
+											FROM product p LEFT JOIN transaction t ON p.prod_no = t.prod_no
+										
 												<where>
+										
 													<if test="searchCondition == 0 and searchKeyword !='' ">
-										 				prod_no like '%${searchKeyword}'
+										 				and prod_no like '%${searchKeyword}'
 													</if>
 													<if test="searchCondition == 1 and searchKeyword !='' ">
-										 				prod_name = #{searchKeyword}
+										 				and prod_name = #{searchKeyword}
 													</if>
 												</where>
-											</if>
-											ORDER BY prod_no ) inner_table
+								
+											ORDER BY p.prod_no ) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>

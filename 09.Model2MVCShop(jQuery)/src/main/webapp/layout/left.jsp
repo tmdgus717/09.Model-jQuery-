@@ -55,6 +55,18 @@
 		 	$( ".Depth03:contains('상 품 검 색')" ).on("click" , function() {
 				$(window.parent.frames["rightFrame"].document.location).attr("href","/product/listProduct?menu=search");
 			}); 
+		 	$( ".Depth03:contains('구매이력조회')" ).on("click" , function() {
+				$(window.parent.frames["rightFrame"].document.location).attr("href","/purchase/listPurchase");
+			});
+		 	$( ".Depth03:contains('최근 본 상품')" ).on("click" , function() {
+		 		history();
+		 	});
+		 	$( ".Depth03:contains('채팅방')" ).on("click" , function() {
+		 		$(window.parent.frames["rightFrame"].document.location).attr("href","/chatroom/listChatroom");
+		 	});
+		 	$( ".Depth03:contains('채팅방 생성')" ).on("click" , function() {
+		 		$(window.parent.frames["rightFrame"].document.location).attr("href","/chatroom/addChatroom");
+		 	});
 		});	
 		 
 	</script>
@@ -134,11 +146,14 @@
 					상 품 검 색
 				</td>
 			</tr>
-			
+			<tr>
+				<td class="DepthEnd">&nbsp;</td>
+			</tr>
 			<c:if test="${ !empty user && user.role == 'user'}">
 			<tr>
 				<td class="Depth03">
-					<a href="/listPurchase.do"  target="rightFrame">구매이력조회</a>
+					<!-- a href="/listPurchase.do"  target="rightFrame">구매이력조회</a-->
+					구매이력조회
 				</td>
 			</tr>
 			</c:if>
@@ -147,7 +162,20 @@
 				<td class="DepthEnd">&nbsp;</td>
 			</tr>
 			<tr>
-				<td class="Depth03"><a href="javascript:history()">최근 본 상품</a></td>
+				<td class="Depth03"><!--a href="javascript:history()"-->최근 본 상품</td>
+			
+			</tr>
+			
+			<tr>
+				<td class="DepthEnd">&nbsp;</td>
+			</tr>
+			
+			<tr>
+				<td class="Depth03">채팅방</td>
+			</tr>
+			
+			<tr>
+				<td class="Depth03">채팅방 생성</td>
 			</tr>
 		</table>
 	</td>
